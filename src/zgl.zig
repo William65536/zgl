@@ -985,7 +985,7 @@ pub fn getUniformLocation(program: types.Program, name: [:0]const u8) ?u32 {
 pub fn getUniformBlockIndex(program: types.Program, name: [:0]const u8) ?u32 {
     const loc = binding.getUniformBlockIndex(@intFromEnum(program), name.ptr);
     checkError();
-    if (loc < 0)
+    if (@as(c_int, @bitCast(loc)) < 0)
         return null;
     return @intCast(loc);
 }
